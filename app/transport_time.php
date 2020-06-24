@@ -19,4 +19,8 @@ class transport_time extends Model
     protected $fillable = [
         'name', 'price'
     ];
+
+    public function transport_contracts(){
+        return $this->hasMany('App\transport_contract', 'transport_time_id', 'id');
+    }
 }

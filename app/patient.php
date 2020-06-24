@@ -17,4 +17,8 @@ class patient extends Model
     protected $fillable = [
         'fullname', 'pj_id'
     ];
+
+    public function pjs(){
+        return $this->hasOne('App\pj', 'id', 'pj_id');
+    }
 }

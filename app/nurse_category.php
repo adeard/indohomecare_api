@@ -19,7 +19,11 @@ class nurse_category extends Model
         'name'
     ];
 
-    // public function users(){
-    //     return $this->hasMany('App\Users', 'role_id', 'id');
-    // }
+    public function nurses(){
+        return $this->hasMany('App\nurse', 'nurse_category_id', 'id');
+    }
+
+    public function nurseP_sessions(){
+        return $this->hasMany('App\nurse_session', 'nurse_category_id', 'id');
+    }
 }

@@ -21,6 +21,10 @@ class pj extends Model
     ];
 
     public function contracts(){
-        return $this->hasMany('App\contracts', 'pj_id', 'id');
+        return $this->hasMany('App\contract', 'pj_id', 'id');
+    }
+
+    public function patients(){
+        return $this->hasMany('App\patient', 'pj_id', 'id');
     }
 }

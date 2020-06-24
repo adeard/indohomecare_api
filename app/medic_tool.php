@@ -19,4 +19,12 @@ class medic_tool extends Model
     protected $fillable = [
         'name', 'medic_tool_category'
     ];
+
+    public function medic_tool_contracts(){
+        return $this->hasMany('App\medic_tool_contract', 'medic_tool_id', 'id');
+    }
+
+    public function medic_tool_sessions(){
+        return $this->hasMany('App\medic_tool_session', 'medic_tool_id', 'id');
+    }
 }

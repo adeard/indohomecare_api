@@ -19,4 +19,12 @@ class nurse extends Model
     protected $fillable = [
         'fullname', 'nurse_category_id'
     ];
+
+    public function nurse_categories(){
+        return $this->hasOne('App\nurse_category', 'id', 'nurse_category_id');
+    }
+
+    public function nurse_contracts(){
+        return $this->hasMany('App\nurse_contract', 'nurse_id', 'id');
+    }
 }

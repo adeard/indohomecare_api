@@ -21,10 +21,34 @@ class contract extends Model
     ];
 
     public function users(){
-        return $this->hasOne('App\Users', 'id', 'created_by');
+        return $this->hasOne('App\User', 'id', 'created_by');
     }
 
     public function pjs(){
-        return $this->hasOne('App\Users', 'id', 'created_by');
+        return $this->hasOne('App\pj', 'id', 'pj_id');
+    }
+
+    public function medic_tool_contracts(){
+        return $this->hasMany('App\medic_tool_contract', 'contract_id', 'id');
+    }
+
+    public function contract_histories(){
+        return $this->hasMany('App\contract_history', 'contract_id', 'id');
+    }
+
+    public function therapist_contracts(){
+        return $this->hasMany('App\therapist_contract', 'contract_id', 'id');
+    }
+
+    public function nurse_contracts(){
+        return $this->hasMany('App\nurse_contract', 'contract_id', 'id');
+    }
+
+    public function transport_contracts(){
+        return $this->hasMany('App\transport_contract', 'contract_id', 'id');
+    }
+
+    public function event_contracts(){
+        return $this->hasMany('App\event_contract', 'contract_id', 'id');
     }
 }
