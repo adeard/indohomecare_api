@@ -13,7 +13,7 @@ class transport_time extends Model
     public $keyType      = 'string';
     public $primaryKey   = 'id';
 
-    protected $table = 'nurses';
+    protected $table = 'transport_times';
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [

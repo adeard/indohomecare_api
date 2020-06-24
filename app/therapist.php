@@ -13,7 +13,7 @@ class therapist extends Model
     public $keyType      = 'string';
     public $primaryKey   = 'id';
 
-    protected $table = 'therapist';
+    protected $table = 'therapists';
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
