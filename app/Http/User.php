@@ -63,4 +63,8 @@ class User extends Model implements JWTSubject, AuthenticatableContract
     public function roles(){
         return $this->hasOne('App\role', 'id', 'role_id');
     }
+
+    public function contracts(){
+        return $this->hasMany('App\contracts', 'created_by', 'id');
+    }
 }
