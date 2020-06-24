@@ -14,4 +14,7 @@ class patient extends Model
 
     protected $table = 'patients';
     protected $guarded = ['id'];
+    protected $fillable = [
+        'fullname', 'pj_id'
+    ];
 }
