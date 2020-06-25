@@ -39,6 +39,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         //Patients
         Route::get('/patients', 'PatientsController@index');
         Route::get('/patients/{id}', 'PatientsController@detail');
+        Route::get('/patients/pjs/{pj_id}', 'PatientsController@getGroupPJ');
         Route::post('/patients', 'PatientsController@store');
         Route::put('/patients/{id}', 'PatientsController@update');
         Route::delete('/patients/{id}', 'PatientsController@delete');
