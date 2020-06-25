@@ -36,16 +36,18 @@ class NurseSessionController extends Controller
     public function store(Request $request) {
         try {
             $validator = Validator::make($request->all(), [
-                'fullname' => 'required',
-                'nurse_category_id' => 'required'
+                'name' => 'required',
+                'nurse_category_id' => 'required',
+                'price' => 'required'
             ]);
 
             if($validator->fails())
                 return response()->json($validator->errors(), 400);
 
             $data_post = [
-                'fullname' => $request->get('fullname'),
-                'nurse_category_id' => $request->get('nurse_category_id')
+                'name' => $request->get('name'),
+                'nurse_category_id' => $request->get('nurse_category_id'),
+                'price' => $request->get('price')
             ];
 
             $this->data = nurse_session::create($data_post);

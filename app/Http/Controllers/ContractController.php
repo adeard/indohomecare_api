@@ -33,6 +33,7 @@ class ContractController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'pj_id' => 'required',
+                'patient_id' => 'required',
                 'created_by' => 'required',
                 'contract_no' => 'required',
                 'status' => 'required'
@@ -43,6 +44,7 @@ class ContractController extends Controller
 
             $data_post = [
                 'pj_id' => $request->get('pj_id'),
+                'patient_id' => $request->get('patient_id'),
                 'created_by' => $request->get('created_by'),
                 'contract_no' => $request->get('contract_no'),
                 'status' => $request->get('status'),
