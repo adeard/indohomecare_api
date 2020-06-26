@@ -97,4 +97,15 @@ class NurseSessionController extends Controller
 
         return response()->json(Api::format($this->status, $this->data, $this->errorMsg), 200);
     }
+
+    public function getNurseCategory($nurse_category_id = null) {
+        try {
+            $this->data = nurse_session::all()->where('nurse_category_id', $nurse_category_id);
+        } catch (\Exception $e) {
+            $this->status = "false";
+            $this->errorMsg = $e->getMessage();
+        }
+
+        return response()->json(Api::format($this->status, $this->data, $this->errorMsg), 200);
+    }
 }

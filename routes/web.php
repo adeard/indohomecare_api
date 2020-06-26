@@ -82,6 +82,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         //Medic Tool Sessions
         Route::get('/medic_tool_sessions', 'MedicToolSessionController@index');
         Route::get('/medic_tool_sessions/{id}', 'MedicToolSessionController@detail');
+        Route::get('/medic_tool_sessions/medic_tool/{medic_tool_id}', 'MedicToolSessionController@getMedicTools');
         Route::post('/medic_tool_sessions', 'MedicToolSessionController@store');
         Route::put('/medic_tool_sessions/{id}', 'MedicToolSessionController@update');
         Route::delete('/medic_tool_sessions/{id}', 'MedicToolSessionController@delete');
@@ -110,6 +111,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         //Nurse Sessions
         Route::get('/nurse_sessions', 'NurseSessionController@index');
         Route::get('/nurse_sessions/{id}', 'NurseSessionController@detail');
+        Route::get('/nurse_sessions/nurse_category_id/{nurse_category_id}', 'NurseSessionController@getNurseCategory');
         Route::post('/nurse_sessions', 'NurseSessionController@store');
         Route::put('/nurse_sessions/{id}', 'NurseSessionController@update');
         Route::delete('/nurse_sessions/{id}', 'NurseSessionController@delete');
@@ -143,11 +145,11 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         Route::delete('/therapist_session/{id}', 'TherapistSessionController@delete');
 
         //Transport Contracts
-        Route::get('/transport_contracts', 'TransportContractsController@index');
-        Route::get('/transport_contracts/{id}', 'TransportContractsController@detail');
-        Route::post('/transport_contracts', 'TransportContractsController@store');
-        Route::put('/transport_contracts/{id}', 'TransportContractsController@update');
-        Route::delete('/transport_contracts/{id}', 'TransportContractsController@delete');
+        Route::get('/transport_contracts', 'TransportContractController@index');
+        Route::get('/transport_contracts/{id}', 'TransportContractController@detail');
+        Route::post('/transport_contracts', 'TransportContractController@store');
+        Route::put('/transport_contracts/{id}', 'TransportContractController@update');
+        Route::delete('/transport_contracts/{id}', 'TransportContractController@delete');
 
         //Transport Times
         Route::get('/transport_times', 'TransportTimeController@index');

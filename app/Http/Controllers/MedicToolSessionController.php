@@ -32,7 +32,6 @@ class MedicToolSessionController extends Controller
     public function store(Request $request) {
         try {
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
                 'medic_tool_id' => 'required',
                 'price' => 'required',
             ]);
@@ -41,7 +40,6 @@ class MedicToolSessionController extends Controller
                 return response()->json($validator->errors(), 400);
 
             $data_post = [
-                'name' => $request->get('name'),
                 'medic_tool_id' => $request->get('medic_tool_id'),
                 'price' => $request->get('price'),
             ];
@@ -73,6 +71,17 @@ class MedicToolSessionController extends Controller
             $this->data = medic_tool_session::find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
+            $this->errorMsg = $e->getMessage();
+        }
+
+        return response()->json(Api::format($this->status, $this->data, $this->errorMsg), 200);
+    }
+
+    public function getMedicTools($medic_tool_id = null) {
+        try {
+            $this->data = medic_tool_session::all()->where('medic_tool_id', $medic_tool_id);
+        } catch (\Exception $e) {
+            $this->status = "false";
             $this->errorMsg = $e->getMessage();
         }
 
