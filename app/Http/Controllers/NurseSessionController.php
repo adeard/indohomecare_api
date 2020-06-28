@@ -19,8 +19,7 @@ class NurseSessionController extends Controller
     public function index(Request $request) {
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
-
-            $result = nurse_session::paginate($paginate);
+            $result = nurse_session::with(['nurse_categories'])->paginate($paginate);
             if ($request->nurse_category_id)
                 $result = nurse_session::where('nurse_category_id', $request->nurse_category_id)->paginate($paginate);
 

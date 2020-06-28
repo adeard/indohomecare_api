@@ -17,7 +17,7 @@ class medic_tool_session extends Model
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'medic_tool_id', 'price'
+        'medic_tool_id', 'price', 'name'
     ];
 
     public function medic_tools(){

@@ -19,8 +19,11 @@ class TherapistContractController extends Controller
     public function index(Request $request) {
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
-
-            $this->data = therapist_contract::paginate($paginate);
+            if ($request->contract_id) {
+                $this->data = therapist_contract::with(['therapists', 'therapist_sessions'])->where('contract_id', $request->contract_id)->paginate($paginate);
+            } else {
+                $this->data = therapist_contract::paginate($paginate);
+            }
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();

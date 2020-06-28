@@ -20,7 +20,7 @@ class PatientsController extends Controller
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
 
-            $this->data = patient::paginate($paginate);
+            $this->data = patient::with(['pjs'])->paginate($paginate);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();

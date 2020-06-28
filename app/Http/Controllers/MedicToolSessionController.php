@@ -20,7 +20,7 @@ class MedicToolSessionController extends Controller
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
 
-            $this->data = medic_tool_session::paginate($paginate);
+            $this->data = medic_tool_session::with(['medic_tools'])->paginate($paginate);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -33,6 +33,7 @@ class MedicToolSessionController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'medic_tool_id' => 'required',
+                'name' => 'required',
                 'price' => 'required',
             ]);
 
@@ -41,6 +42,7 @@ class MedicToolSessionController extends Controller
 
             $data_post = [
                 'medic_tool_id' => $request->get('medic_tool_id'),
+                'name' => $request->get('name'),
                 'price' => $request->get('price'),
             ];
 

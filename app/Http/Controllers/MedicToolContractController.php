@@ -19,8 +19,11 @@ class MedicToolContractController extends Controller
     public function index(Request $request) {
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
-
-            $this->data = medic_tool_contract::paginate($paginate);
+            if ($request->contract_id) {
+                $this->data = medic_tool_contract::with(['medic_tools', 'medic_tool_sessions'])->where('contract_id', $request->contract_id)->paginate($paginate);
+            } else {
+                $this->data = medic_tool_contract::paginate($paginate);
+            }
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
