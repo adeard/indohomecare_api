@@ -130,6 +130,13 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         Route::put('/therapist/{id}', 'TherapistController@update');
         Route::delete('/therapist/{id}', 'TherapistController@delete');
 
+        //Therapist Type
+        Route::get('/therapist_types', 'TherapistTypeController@index');
+        Route::get('/therapist_types/{id}', 'TherapistTypeController@detail');
+        Route::post('/therapist_types', 'TherapistTypeController@store');
+        Route::put('/therapist_types/{id}', 'TherapistTypeController@update');
+        Route::delete('/therapist_types/{id}', 'TherapistTypeController@delete');
+
         //Therapist Contract
         Route::get('/therapist_contracts', 'TherapistContractController@index');
         Route::get('/therapist_contracts/{id}', 'TherapistContractController@detail');
