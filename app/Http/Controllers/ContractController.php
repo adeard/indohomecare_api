@@ -32,8 +32,8 @@ class ContractController extends Controller
     public function store(Request $request) {
         try {
             $validator = Validator::make($request->all(), [
-                'pj_id' => 'required',
-                'patient_id' => 'required',
+                // 'pj_id' => 'required',
+                // 'patient_id' => 'required',
                 'created_by' => 'required',
                 'contract_no' => 'required',
                 'status' => 'required'
@@ -43,8 +43,8 @@ class ContractController extends Controller
                 return response()->json($validator->errors(), 400);
 
             $data_post = [
-                'pj_id' => $request->get('pj_id'),
-                'patient_id' => $request->get('patient_id'),
+                // 'pj_id' => $request->get('pj_id'),
+                // 'patient_id' => $request->get('patient_id'),
                 'created_by' => $request->get('created_by'),
                 'contract_no' => $request->get('contract_no'),
                 'status' => $request->get('status'),
