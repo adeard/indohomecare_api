@@ -32,14 +32,16 @@ class TherapistController extends Controller
     public function store(Request $request) {
         try {
             $validator = Validator::make($request->all(), [
-                'name' => 'required'
+                'name' => 'required',
+                'therapist_type_id' => 'required'
             ]);
 
             if($validator->fails())
                 return response()->json($validator->errors(), 400);
 
             $data_post = [
-                'name' => $request->get('name')
+                'name' => $request->get('name'),
+                'therapist_type_id' => $request->get('therapist_type_id')
             ];
 
             $this->data = therapist::create($data_post);

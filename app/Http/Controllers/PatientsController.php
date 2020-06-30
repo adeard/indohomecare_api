@@ -32,8 +32,17 @@ class PatientsController extends Controller
     public function store(Request $request) {
         try {
             $validator = Validator::make($request->all(), [
-                'fullname' => 'required|string|max:255',
+                'fullname' => 'required',
                 'pj_id' => 'required',
+                'gender' => 'required',
+                'years' => 'required',
+                'recomendation_from' => 'required',
+                'height' => 'required',
+                'weight' => 'required',
+                'address' => 'required',
+                'attached_tools' => 'required',
+                'diagnosis' => 'required',
+                'main_complaint' => 'required'
             ]);
 
             if($validator->fails())
@@ -42,6 +51,15 @@ class PatientsController extends Controller
             $data_post = [
                 'fullname' => $request->get('fullname'),
                 'pj_id' => $request->get('pj_id'),
+                'gender' => $request->get('gender'),
+                'years' => $request->get('years'),
+                'recomendation_from' => $request->get('recomendation_from'),
+                'height' => $request->get('height'),
+                'weight' => $request->get('weight'),
+                'address' => $request->get('address'),
+                'attached_tools' => $request->get('attached_tools'),
+                'diagnosis' => $request->get('diagnosis'),
+                'main_complaint' => $request->get('main_complaint')
             ];
 
             $this->data = patient::create($data_post);

@@ -32,14 +32,22 @@ class PjController extends Controller
     public function store(Request $request) {
         try {
             $validator = Validator::make($request->all(), [
-                'fullname' => 'required|string|max:255'
+                'fullname' => 'required',
+                'handphone' => 'required',
+                'ktp' => 'required',
+                'email' => 'required',
+                'address' => 'required'
             ]);
 
             if($validator->fails())
                 return response()->json($validator->errors(), 400);
 
             $data_post = [
-                'fullname' => $request->get('fullname')
+                'fullname' => $request->get('fullname'),
+                'handphone' => $request->get('handphone'),
+                'ktp' => $request->get('ktp'),
+                'email' => $request->get('email'),
+                'address' => $request->get('address')
             ];
 
             $this->data = pj::create($data_post);

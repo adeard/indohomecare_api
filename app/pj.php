@@ -17,7 +17,7 @@ class pj extends Model
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'fullname'
+        'fullname', 'handphone', 'ktp', 'email', 'address'
     ];
 
     public function contracts(){

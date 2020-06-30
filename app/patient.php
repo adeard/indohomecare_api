@@ -15,7 +15,7 @@ class patient extends Model
     protected $table = 'patients';
     protected $guarded = ['id'];
     protected $fillable = [
-        'fullname', 'pj_id'
+        'fullname', 'pj_id', 'gender', 'years', 'recomendation_from', 'height', 'weight', 'address', 'attached_tools', 'diagnosis', 'main_complaint'
     ];
 
     public function pjs(){

@@ -17,7 +17,7 @@ class therapist_session extends Model
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'name', 'price'
+        'name', 'price', 'therapist_type_id'
     ];
 
     public function therapist_contracts(){

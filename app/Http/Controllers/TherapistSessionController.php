@@ -34,6 +34,7 @@ class TherapistSessionController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'price' => 'required',
+                'therapist_type_id' => 'required'
             ]);
 
             if($validator->fails())
@@ -41,7 +42,8 @@ class TherapistSessionController extends Controller
 
             $data_post = [
                 'name' => $request->get('name'),
-                'price' => $request->get('price')
+                'price' => $request->get('price'),
+                'therapist_type_id' => $request->get('therapist_type_id')
             ];
 
             $this->data = therapist_session::create($data_post);

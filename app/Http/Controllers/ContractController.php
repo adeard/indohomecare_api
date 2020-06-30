@@ -20,7 +20,15 @@ class ContractController extends Controller
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
 
-            $this->data = contract::paginate($paginate);
+            if ($request->start && $request->end) {
+                $this->data = contract::whereBetween('created_at', [$request->start.' 00:00:00',$request->end.' 23:59:59'])->get();
+            } else if ($request->contract_no) {
+                $this->data = contract::with(['users'])->where('contract_no', '=', $request->contract_no)->first();
+            } else {
+                $this->data = contract::paginate($paginate);
+            }
+
+            // $this->data = contract::paginate($paginate);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -61,7 +69,7 @@ class ContractController extends Controller
 
     public function detail($id = null) {
         try {
-            $this->data = contract::find($id);
+            $this->data = contract::with(['users'])->find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();

@@ -17,7 +17,7 @@ class therapist extends Model
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'name'
+        'name', 'therapist_type_id'
     ];
 
     public function therapist_contracts(){
