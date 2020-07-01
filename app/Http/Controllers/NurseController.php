@@ -20,7 +20,13 @@ class NurseController extends Controller
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
 
-            $this->data = nurse::with(['nurse_categories'])->paginate($paginate);
+            if ($request->nurse_category_id) {
+                $this->data = nurse::with(['nurse_categories'])->where('nurse_category_id', $request->nurse_category_id)->paginate($paginate);
+            } else {
+                $this->data = nurse::with(['nurse_categories'])->paginate($paginate); 
+            }
+
+            // $this->data = nurse::with(['nurse_categories'])->paginate($paginate);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
