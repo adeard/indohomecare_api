@@ -147,6 +147,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         //Therapist Session
         Route::get('/therapist_session', 'TherapistSessionController@index');
         Route::get('/therapist_session/{id}', 'TherapistSessionController@detail');
+        Route::get('/therapist_session/therapist_type_id/{therapist_type_id}', 'TherapistSessionController@getTherapistType');
         Route::post('/therapist_session', 'TherapistSessionController@store');
         Route::put('/therapist_session/{id}', 'TherapistSessionController@update');
         Route::delete('/therapist_session/{id}', 'TherapistSessionController@delete');

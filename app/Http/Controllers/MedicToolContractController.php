@@ -38,6 +38,7 @@ class MedicToolContractController extends Controller
                 'medic_tool_id' => 'required',
                 'medic_tool_session_id' => 'required',
                 'contract_id' => 'required',
+                'quantity' => 'required'
             ]);
 
             if($validator->fails())
@@ -46,7 +47,9 @@ class MedicToolContractController extends Controller
             $data_post = [
                 'contract_id' => $request->get('contract_id'),
                 'medic_tool_id' => $request->get('medic_tool_id'),
-                'medic_tool_session_id' => $request->get('medic_tool_session_id')
+                'medic_tool_session_id' => $request->get('medic_tool_session_id'),
+                'quantity' => $request->get('quantity'),
+                'total_price' => $request->get('total_price')
             ];
 
             $this->data = medic_tool_contract::create($data_post);

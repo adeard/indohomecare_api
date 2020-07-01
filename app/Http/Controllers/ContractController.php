@@ -55,7 +55,7 @@ class ContractController extends Controller
                 // 'patient_id' => $request->get('patient_id'),
                 'created_by' => $request->get('created_by'),
                 'contract_no' => $request->get('contract_no'),
-                'status' => $request->get('status'),
+                'status' => $request->get('status')
             ];
 
             $this->data = contract::create($data_post);

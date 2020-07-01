@@ -93,4 +93,15 @@ class TherapistSessionController extends Controller
 
         return response()->json(Api::format($this->status, $this->data, $this->errorMsg), 200);
     }
+
+    public function getTherapistType($therapist_type_id = null) {
+        try {
+            $this->data = therapist_session::all()->where('therapist_type_id', $therapist_type_id);
+        } catch (\Exception $e) {
+            $this->status = "false";
+            $this->errorMsg = $e->getMessage();
+        }
+
+        return response()->json(Api::format($this->status, $this->data, $this->errorMsg), 200);
+    }
 }

@@ -17,7 +17,7 @@ class medic_tool_contract extends Model
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'medic_tool_id', 'medic_tool_session_id', 'contract_id'
+        'medic_tool_id', 'medic_tool_session_id', 'contract_id', 'quantity', 'total_price'
     ];
 
     public function contracts(){
