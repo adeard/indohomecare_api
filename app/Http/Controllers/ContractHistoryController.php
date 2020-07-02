@@ -20,7 +20,11 @@ class ContractHistoryController extends Controller
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
 
-            $this->data = contract_history::paginate($paginate);
+            if ($request->contract_id) {
+                $this->data = contract_history::where('contract_id', $request->contract_id)->paginate($paginate);
+            } else {
+                $this->data = contract_history::paginate($paginate);
+            }
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
