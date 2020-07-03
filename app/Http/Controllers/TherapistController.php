@@ -20,7 +20,13 @@ class TherapistController extends Controller
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
 
-            $this->data = therapist::paginate($paginate);
+            if ($request->therapist_type_id) {
+                $this->data = therapist::with(['therapist_type'])->where('therapist_type_id', $request->therapist_type_id)->paginate($paginate);
+            } else {
+                $this->data = therapist::with(['therapist_type'])->paginate($paginate);
+            }
+
+            // $this->data = therapist::paginate($paginate);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();

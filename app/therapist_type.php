@@ -19,4 +19,8 @@ class therapist_type extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function therapist(){
+        return $this->hasMany('App\therapist', 'therapist_type_id', 'id');
+    }
 }

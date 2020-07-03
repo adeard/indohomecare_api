@@ -20,6 +20,10 @@ class therapist extends Model
         'name', 'therapist_type_id'
     ];
 
+    public function therapist_type(){
+        return $this->hasOne('App\therapist_type', 'id', 'therapist_type_id');
+    }
+
     public function therapist_contracts(){
         return $this->hasMany('App\therapist_contract', 'therapist_id', 'id');
     }
