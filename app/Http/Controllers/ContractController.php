@@ -28,6 +28,10 @@ class ContractController extends Controller
             //     $contract->whereBetween('contracts.created_at', [$start.' 00:00:00', $end.' 23:59:59']);
             // }
 
+            if ($request->start_no && $request->end_no) {
+                $contract->whereBetween('created_at', [$request->start_no.' 00:00:00', $request->end_no.' 23:59:59']);
+            }
+
             if ($request->pj_id) {
                 $contract->where('pj_id', $request->pj_id);
             }
