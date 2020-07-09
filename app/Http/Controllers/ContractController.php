@@ -21,39 +21,24 @@ class ContractController extends Controller
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
 
-            if ($request->action_contract == 'search') {
-                $contract = DB::table('contracts')
-                ->join('pjs', 'contracts.pj_id', '=', 'pjs.id')
-                ->join('patients', 'contracts.patient_id', '=', 'patients.id')
-                ->select('contracts.*', 'pjs.fullname AS pj_fullname', 'patients.fullname AS patient_fullname');
-    
-                if ($request->start && $request->end) {
-                    $start = is_numeric($request->start ? date('Y-m-d', $request->start) : date('Y-m-d'));
-                    $end = is_numeric($request->end ? date('Y-m-d', $request->end) : date('Y-m-d'));
+            $contract = contract::with(['pjs', 'patients', 'users']);
+            // if ($request->start && $request->end) {
+            //     $start = is_numeric($request->start ? date('Y-m-d', $request->start) : date('Y-m-d'));
+            //     $end = is_numeric($request->end ? date('Y-m-d', $request->end) : date('Y-m-d')) 
+            //     $contract->whereBetween('contracts.created_at', [$start.' 00:00:00', $end.' 23:59:59']);
+            // }
 
-                    $contract = $contract->whereBetween('contracts.created_at', [$start.' 00:00:00', $end.' 23:59:59']);
-                }
-
-                if ($request->pj_id) {
-                    $contract = $contract->where('contracts.pj_id', $request->pj_id);
-                }
-
-                if ($request->patient_id) {
-                    $contract = $contract->where('contracts.patient_id', $request->patient_id);
-                }
-
-                $contract = $contract->paginate($paginate);
-
-                $this->data = $contract;
+            if ($request->pj_id) {
+                $contract->where('pj_id', $request->pj_id);
+            }
+            if ($request->patient_id) {
+                $contract->where('patient_id', $request->patient_id);
+            }
+            if ($request->contract_no) {
+                $contract->where('contract_no', $request->contract_no);
             }
 
-            if ($request->start_no && $request->end_no) {
-                $this->data = contract::whereBetween('created_at', [$request->start_no.' 00:00:00',$request->end_no.' 23:59:59'])->get();
-            } else if ($request->contract_no) {
-                $this->data = contract::with(['users'])->where('contract_no', '=', $request->contract_no)->first();
-            } else {
-                $this->data = contract::paginate($paginate);
-            }
+            $this->data = $contract->paginate($paginate);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();

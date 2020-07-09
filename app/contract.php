@@ -28,6 +28,10 @@ class contract extends Model
         return $this->hasOne('App\pj', 'id', 'pj_id');
     }
 
+    public function patients(){
+        return $this->hasOne('App\patient', 'id', 'patient_id');
+    }
+
     public function medic_tool_contracts(){
         return $this->hasMany('App\medic_tool_contract', 'contract_id', 'id');
     }
