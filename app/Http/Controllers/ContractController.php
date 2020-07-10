@@ -22,11 +22,22 @@ class ContractController extends Controller
             $paginate = ($request->has('limit'))?$request->limit:10;
 
             $contract = contract::with(['pjs', 'patients', 'users']);
-            // if ($request->start && $request->end) {
-            //     $start = is_numeric($request->start ? date('Y-m-d', $request->start) : date('Y-m-d'));
-            //     $end = is_numeric($request->end ? date('Y-m-d', $request->end) : date('Y-m-d')) 
-            //     $contract->whereBetween('contracts.created_at', [$start.' 00:00:00', $end.' 23:59:59']);
-            // }
+
+            if ($request->start && $request->end) {
+                if (is_numeric($request->start)) {
+                    $start = date('Y-m-d', $request->start);
+                } else {
+                    $start = date('Y-m-d');
+                }
+
+                if (is_numeric($request->end)) {
+                    $end = date('Y-m-d', $request->end);
+                } else {
+                    $end = date('Y-m-d');
+                }
+
+                $contract->whereBetween('created_at', [$start.' 00:00:00', $end.' 23:59:59']);
+            }
 
             if ($request->start_no && $request->end_no) {
                 $contract->whereBetween('created_at', [$request->start_no.' 00:00:00', $request->end_no.' 23:59:59']);
@@ -35,9 +46,11 @@ class ContractController extends Controller
             if ($request->pj_id) {
                 $contract->where('pj_id', $request->pj_id);
             }
+
             if ($request->patient_id) {
                 $contract->where('patient_id', $request->patient_id);
             }
+            
             if ($request->contract_no) {
                 $contract->where('contract_no', $request->contract_no);
             }
