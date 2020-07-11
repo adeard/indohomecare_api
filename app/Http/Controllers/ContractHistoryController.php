@@ -21,9 +21,9 @@ class ContractHistoryController extends Controller
             $paginate = ($request->has('limit'))?$request->limit:10;
 
             if ($request->contract_id) {
-                $this->data = contract_history::where('contract_id', $request->contract_id)->paginate($paginate);
+                $this->data = contract_history::with(['users'])->where('contract_id', $request->contract_id)->paginate($paginate);
             } else {
-                $this->data = contract_history::paginate($paginate);
+                $this->data = contract_history::with(['users'])->paginate($paginate);
             }
         } catch (\Exception $e) {
             $this->status   = "false";
@@ -45,7 +45,8 @@ class ContractHistoryController extends Controller
 
             $data_post = [
                 'contract_id' => $request->get('contract_id'),
-                'description' => $request->get('description')
+                'description' => $request->get('description'),
+                'user_id' => $request->get('user_id')
             ];
 
             $this->data = contract_history::create($data_post);

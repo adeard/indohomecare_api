@@ -65,6 +65,10 @@ class User extends Model implements JWTSubject, AuthenticatableContract
     }
 
     public function contracts(){
-        return $this->hasMany('App\contracts', 'created_by', 'id');
+        return $this->hasMany('App\contract', 'created_by', 'id');
+    }
+
+    public function contract_histories(){
+        return $this->hasMany('App\contract_history', 'user_id', 'id');
     }
 }

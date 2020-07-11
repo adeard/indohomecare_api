@@ -17,10 +17,14 @@ class contract_history extends Model
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'contract_id', 'description'
+        'contract_id', 'description', 'user_id'
     ];
 
     public function contracts(){
         return $this->hasOne('App\contract', 'id', 'contract_id');
+    }
+
+    public function users(){
+        return $this->hasOne('App\User', 'id', 'user_id');
     }
 }
