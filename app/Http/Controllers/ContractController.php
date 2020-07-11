@@ -55,6 +55,10 @@ class ContractController extends Controller
                 $contract->where('contract_no', $request->contract_no);
             }
 
+            if ($request->status) {
+                $contract->where('status', $request->status);
+            }
+
             $this->data = $contract->paginate($paginate);
         } catch (\Exception $e) {
             $this->status   = "false";
@@ -96,7 +100,7 @@ class ContractController extends Controller
 
     public function detail($id = null) {
         try {
-            $this->data = contract::with(['users'])->find($id);
+            $this->data = contract::with(['users', 'pjs', 'patients'])->find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
