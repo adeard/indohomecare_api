@@ -176,6 +176,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
 
         //Statistic
         Route::get('/statistic/status', 'StatisticController@status');
+        Route::get('/statistic/service', 'StatisticController@service');
     });
 });
 
