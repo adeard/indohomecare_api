@@ -173,6 +173,9 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         Route::post('/contract_statuses', 'ContractStatusController@store');
         Route::put('/contract_statuses/{id}', 'ContractStatusController@update');
         Route::delete('/contract_statuses/{id}', 'ContractStatusController@delete');
+
+        //Statistic
+        Route::get('/statistic/status', 'StatisticController@status');
     });
 });
 

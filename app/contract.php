@@ -55,4 +55,8 @@ class contract extends Model
     public function event_contracts(){
         return $this->hasMany('App\event_contract', 'contract_id', 'id');
     }
+
+    public function contract_statuses(){
+        return $this->hasOne('App\contract_status', 'id', 'contract_status_id');
+    }
 }
