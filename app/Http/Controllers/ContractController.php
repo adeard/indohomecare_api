@@ -68,6 +68,38 @@ class ContractController extends Controller
         return response()->json(Api::format($this->status, $this->data, $this->errorMsg), 201);
     }
 
+    public function statistic(Request $request) {
+        try {
+            $contract = contract::select([
+                DB::raw('DATE(`created_at`) as `date`'),
+                DB::raw('COUNT(id) as `count`')
+            ]);
+            $contract->withCount(['pjs','patients']);
+            $start = date('Y-m-d');
+            $end = date('Y-m-d');
+
+            if ($request->start) 
+                $start = date('Y-m-d', $request->start);
+            if ($request->end) 
+                $end = date('Y-m-d', $request->end);
+            if ($request->pj_id) 
+                $contract->where('pj_id', $request->pj_id);
+            if ($request->patient_id) 
+                $contract->where('patient_id', $request->patient_id);
+            if ($request->contract_no) 
+                $contract->where('contract_no', $request->contract_no);
+            if ($request->status) 
+                $contract->where('status', $request->status);
+
+            $this->data = $contract->whereBetween('created_at', [$start, $end])->groupBy('date')->get();
+        } catch (\Exception $e) {
+            $this->status   = "false";
+            $this->errorMsg = $e->getMessage();
+        }
+
+        return response()->json(Api::format($this->status, $this->data, $this->errorMsg), 201);
+    }
+
     public function store(Request $request) {
         try {
             $validator = Validator::make($request->all(), [

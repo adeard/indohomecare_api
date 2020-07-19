@@ -46,6 +46,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
 
         //Contracts
         Route::get('/contracts', 'ContractController@index');
+        Route::get('/contracts/statistic', 'ContractController@statistic');
         Route::get('/contracts/{id}', 'ContractController@detail');
         Route::post('/contracts', 'ContractController@store');
         Route::put('/contracts/{id}', 'ContractController@update');
@@ -165,6 +166,13 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         Route::post('/transport_times', 'TransportTimeController@store');
         Route::put('/transport_times/{id}', 'TransportTimeController@update');
         Route::delete('/transport_times/{id}', 'TransportTimeController@delete');
+
+        //Transport Times
+        Route::get('/contract_statuses', 'ContractStatusController@index');
+        Route::get('/contract_statuses/{id}', 'ContractStatusController@detail');
+        Route::post('/contract_statuses', 'ContractStatusController@store');
+        Route::put('/contract_statuses/{id}', 'ContractStatusController@update');
+        Route::delete('/contract_statuses/{id}', 'ContractStatusController@delete');
     });
 });
 
