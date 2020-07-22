@@ -17,7 +17,7 @@ class contract extends Model
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'created_by', 'contract_no', 'status'
+        'created_by', 'contract_no', 'status', 'contract_status_id'
     ];
 
     public function users(){

@@ -183,6 +183,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         Route::get('/reports/medic_tools', 'ReportsController@medicTools');
         Route::get('/reports/therapists', 'ReportsController@therapists');
         Route::get('/reports/transports', 'ReportsController@transports');
+        Route::get('/reports/events', 'ReportsController@events');
     });
 });
 

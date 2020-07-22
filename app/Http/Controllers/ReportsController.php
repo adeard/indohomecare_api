@@ -138,4 +138,35 @@ class ReportsController extends Controller
 
         return response()->json(Api::format($this->status, $this->data, $this->errorMsg), 201);
     }
+
+    public function events(Request $request)
+    {
+        try {
+            $start = date('Y-m-d');
+            $end = date('Y-m-d');
+
+            if ($request->start)
+                $start = date('Y-m-d', $request->start);
+            if ($request->end)
+                $end = date('Y-m-d', $request->end);
+
+            $result = DB::select("
+                SELECT 
+                    `event_contracts`.`event_name` AS 'permintaan_jasa',
+                    (SELECT COUNT(`contracts`.`id`) FROM `contracts` WHERE `contracts`.`id` = `event_contracts`.`contract_id` AND `contracts`.`contract_status_id` = 1 AND DATE(`contracts`.`created_at`) BETWEEN '".$start."' AND '".$end."') AS 'status_draft',
+                    (SELECT COUNT(`contracts`.`id`) FROM `contracts` WHERE `contracts`.`id` = `event_contracts`.`contract_id` AND `contracts`.`contract_status_id` = 2 AND DATE(`contracts`.`created_at`) BETWEEN '".$start."' AND '".$end."') AS 'status_deal',
+                    (SELECT COUNT(`contracts`.`id`) FROM `contracts` WHERE `contracts`.`id` = `event_contracts`.`contract_id` AND `contracts`.`contract_status_id` = 3 AND DATE(`contracts`.`created_at`) BETWEEN '".$start."' AND '".$end."') AS 'status_done',
+                    (SELECT COUNT(`contracts`.`id`) FROM `contracts` WHERE `contracts`.`id` = `event_contracts`.`contract_id` AND `contracts`.`contract_status_id` = 4 AND DATE(`contracts`.`created_at`) BETWEEN '".$start."' AND '".$end."') AS 'status_no_response',
+                    (SELECT COUNT(`contracts`.`id`) FROM `contracts` WHERE `contracts`.`id` = `event_contracts`.`contract_id` AND `contracts`.`contract_status_id` = 5 AND DATE(`contracts`.`created_at`) BETWEEN '".$start."' AND '".$end."') AS 'status_cancel'
+                FROM `event_contracts`;
+            ");
+
+            $this->data = $result;
+        } catch (\Exception $e) {
+            $this->status   = "false";
+            $this->errorMsg = $e->getMessage();
+        }
+
+        return response()->json(Api::format($this->status, $this->data, $this->errorMsg), 201);
+    }
 }

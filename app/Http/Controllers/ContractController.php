@@ -109,7 +109,8 @@ class ContractController extends Controller
                 // 'patient_id' => 'required',
                 'created_by' => 'required',
                 'contract_no' => 'required',
-                'status' => 'required'
+                'status' => 'required',
+                'contract_status_id' => 'required'
             ]);
 
             if($validator->fails())
@@ -120,7 +121,8 @@ class ContractController extends Controller
                 // 'patient_id' => $request->get('patient_id'),
                 'created_by' => $request->get('created_by'),
                 'contract_no' => $request->get('contract_no'),
-                'status' => $request->get('status')
+                'status' => $request->get('status'),
+                'contract_status_id' => $request->get('contract_status_id')
             ];
 
             $this->data = contract::create($data_post);
