@@ -177,6 +177,12 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         //Statistic
         Route::get('/statistic/status', 'StatisticController@status');
         Route::get('/statistic/service', 'StatisticController@service');
+
+        //Reports
+        Route::get('/reports/nurses', 'ReportsController@nurses');
+        Route::get('/reports/medic_tools', 'ReportsController@medicTools');
+        Route::get('/reports/therapists', 'ReportsController@therapists');
+        Route::get('/reports/transports', 'ReportsController@transports');
     });
 });
 
