@@ -81,6 +81,7 @@ class TransportTimeController extends Controller
         try{
             if(!empty($id)){
                 $Obj = transport_time::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }

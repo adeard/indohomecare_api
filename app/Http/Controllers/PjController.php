@@ -87,6 +87,7 @@ class PjController extends Controller
         try{
             if(!empty($id)){
                 $Obj = pj::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }

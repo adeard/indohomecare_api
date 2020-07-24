@@ -86,6 +86,7 @@ class NurseContractController extends Controller
         try{
             if(!empty($id)){
                 $Obj = nurse_contract::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }

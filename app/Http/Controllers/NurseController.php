@@ -87,6 +87,7 @@ class NurseController extends Controller
         try{
             if(!empty($id)){
                 $Obj = nurse::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }

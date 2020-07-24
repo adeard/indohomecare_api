@@ -110,6 +110,7 @@ class PatientsController extends Controller
         try{
             if(!empty($id)){
                 $Obj = patient::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }

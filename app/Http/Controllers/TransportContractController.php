@@ -86,6 +86,7 @@ class TransportContractController extends Controller
         try{
             if(!empty($id)){
                 $Obj = transport_contract::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }

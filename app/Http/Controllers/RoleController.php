@@ -77,6 +77,7 @@ class RoleController extends Controller
         try{
             if(!empty($id)){
                 $Obj = role::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }
