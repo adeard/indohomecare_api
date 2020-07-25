@@ -94,6 +94,7 @@ class MedicToolSessionController extends Controller
         try{
             if(!empty($id)){
                 $Obj = medic_tool_session::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }

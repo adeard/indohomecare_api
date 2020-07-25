@@ -87,6 +87,7 @@ class TherapistController extends Controller
         try{
             if(!empty($id)){
                 $Obj = therapist::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }

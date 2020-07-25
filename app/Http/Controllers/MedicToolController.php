@@ -81,6 +81,7 @@ class MedicToolController extends Controller
         try{
             if(!empty($id)){
                 $Obj = medic_tool::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }

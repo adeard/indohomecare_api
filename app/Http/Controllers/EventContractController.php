@@ -86,6 +86,7 @@ class EventContractController extends Controller
         try{
             if(!empty($id)){
                 $Obj = event_contract::find($id);
+                $Obj->delete();
 
                 $this->data =  $id;
             }
