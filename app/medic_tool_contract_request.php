@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class therapist_type extends Model
+class medic_tool_contract_request extends Model
 {
     use SoftDeletes;
 
@@ -13,18 +13,14 @@ class therapist_type extends Model
     public $keyType      = 'string';
     public $primaryKey   = 'id';
 
-    protected $table = 'therapist_types';
+    protected $table = 'medic_tool_contract_requests';
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'name'
+        'contract_request_id', 'medic_tool_name', 'quantity'
     ];
 
-    public function therapist(){
-        return $this->hasMany('App\therapist', 'therapist_type_id', 'id');
-    }
-
-    public function therapist_contract_requests(){
-        return $this->hasMany('App\therapist_contract_request', 'therapist_type_id', 'id');
+    public function contract_requests(){
+        return $this->hasOne('App\contract_request', 'id', 'contract_request_id');
     }
 }

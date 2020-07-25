@@ -17,7 +17,7 @@ class contract extends Model
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'created_by', 'contract_no', 'status', 'contract_status_id'
+        'created_by', 'contract_no', 'status', 'contract_status_id', 'contract_request_id'
     ];
 
     public function users(){
@@ -30,6 +30,14 @@ class contract extends Model
 
     public function patients(){
         return $this->hasOne('App\patient', 'id', 'patient_id');
+    }
+
+    public function contract_statuses(){
+        return $this->hasOne('App\contract_status', 'id', 'contract_status_id');
+    }
+
+    public function contract_requests(){
+        return $this->hasOne('App\contract_request', 'id', 'contract_request_id');
     }
 
     public function medic_tool_contracts(){
@@ -54,9 +62,5 @@ class contract extends Model
 
     public function event_contracts(){
         return $this->hasMany('App\event_contract', 'contract_id', 'id');
-    }
-
-    public function contract_statuses(){
-        return $this->hasOne('App\contract_status', 'id', 'contract_status_id');
     }
 }

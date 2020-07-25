@@ -23,7 +23,11 @@ class nurse_category extends Model
         return $this->hasMany('App\nurse', 'nurse_category_id', 'id');
     }
 
-    public function nurseP_sessions(){
+    public function nurse_sessions(){
         return $this->hasMany('App\nurse_session', 'nurse_category_id', 'id');
+    }
+
+    public function nurse_contract_requests(){
+        return $this->hasMany('App\nurse_contract_request', 'nurse_category_id', 'id');
     }
 }

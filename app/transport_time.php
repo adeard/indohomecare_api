@@ -23,4 +23,8 @@ class transport_time extends Model
     public function transport_contracts(){
         return $this->hasMany('App\transport_contract', 'transport_time_id', 'id');
     }
+
+    public function transport_contract_requests(){
+        return $this->hasMany('App\transport_contract_request', 'transport_time_id', 'id');
+    }
 }
