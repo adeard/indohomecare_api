@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Patients;
+use App\ServiceSessions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\Api;
 
-class PatientsController extends Controller
+class ServiceSessionsController extends Controller
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class PatientsController extends Controller
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
             
-            $this->data = Patients::paginate($paginate);
+            $this->data = ServiceSessions::paginate($paginate);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -40,7 +40,7 @@ class PatientsController extends Controller
             // if($validator->fails())
             //     return response()->json($validator->errors(), 400);
 
-            $this->data = Patients::create($request->all());
+            $this->data = ServiceSessions::create($request->all());
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -51,7 +51,7 @@ class PatientsController extends Controller
 
     public function detail($id = null) {
         try {
-            $this->data = Patients::find($id);
+            $this->data = ServiceSessions::find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -62,9 +62,9 @@ class PatientsController extends Controller
 
     public function update(Request $request, $id) {
         try {
-            $update = Patients::where('id', $id)->update($request->all());
+            $update = ServiceSessions::where('id', $id)->update($request->all());
 
-            $this->data = Patients::find($id);
+            $this->data = ServiceSessions::find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -76,7 +76,7 @@ class PatientsController extends Controller
     public function delete($id = null) {
         try{
             if(!empty($id)){
-                $Obj = Patients::find($id);
+                $Obj = ServiceSessions::find($id);
                 $Obj->delete();
 
                 $this->data =  $id;

@@ -29,203 +29,117 @@ Route::group(['prefix' => 'api',  'middleware' => 'cors'], function () {
         Route::put('/users/{id}', 'UserController@update');
         Route::delete('/users/{id}', 'UserController@delete');
 
-        //Roles
-        Route::get('/roles', 'RoleController@index');
-        Route::get('/roles/{id}', 'RoleController@detail');
-        Route::post('/roles', 'RoleController@store');
-        Route::put('/roles/{id}', 'RoleController@update');
-        Route::delete('/roles/{id}', 'RoleController@delete');
+        //Candidate Histories
+        Route::get('/candidate_histories', 'CandidateHistoriesController@index');
+        Route::get('/candidate_histories/{id}', 'CandidateHistoriesController@detail');
+        Route::post('/candidate_histories', 'CandidateHistoriesController@store');
+        Route::put('/candidate_histories/{id}', 'CandidateHistoriesController@update');
+        Route::delete('/candidate_histories/{id}', 'CandidateHistoriesController@delete');
+
+        //Candidate Professions
+        Route::get('/candidate_professions', 'CandidateProfessionsController@index');
+        Route::get('/candidate_professions/{id}', 'CandidateProfessionsController@detail');
+        Route::post('/candidate_professions', 'CandidateProfessionsController@store');
+        Route::put('/candidate_professions/{id}', 'CandidateProfessionsController@update');
+        Route::delete('/candidate_professions/{id}', 'CandidateProfessionsController@delete');
+
+        //Candidates
+        Route::get('/candidates', 'CandidatesController@index');
+        Route::get('/candidates/{id}', 'CandidatesController@detail');
+        Route::post('/candidates', 'CandidatesController@store');
+        Route::put('/candidates/{id}', 'CandidatesController@update');
+        Route::delete('/candidates/{id}', 'CandidatesController@delete');
+
+        //Candidate Subtitutions
+        Route::get('/candidate_subtitutions', 'CandidateSubtitutionsController@index');
+        Route::get('/candidate_subtitutions/{id}', 'CandidateSubtitutionsController@detail');
+        Route::post('/candidate_subtitutions', 'CandidateSubtitutionsController@store');
+        Route::put('/candidate_subtitutions/{id}', 'CandidateSubtitutionsController@update');
+        Route::delete('/candidate_subtitutions/{id}', 'CandidateSubtitutionsController@delete');
+
+        //Candidate Trainings
+        Route::get('/candidate_trainings', 'CandidateTrainingsController@index');
+        Route::get('/candidate_trainings/{id}', 'CandidateTrainingsController@detail');
+        Route::post('/candidate_trainings', 'CandidateTrainingsController@store');
+        Route::put('/candidate_trainings/{id}', 'CandidateTrainingsController@update');
+        Route::delete('/candidate_trainings/{id}', 'CandidateTrainingsController@delete');
+
+        //Contract Periods
+        Route::get('/contract_periods', 'ContractPeriodsController@index');
+        Route::get('/contract_periods/{id}', 'ContractPeriodsController@detail');
+        Route::post('/contract_periods', 'ContractPeriodsController@store');
+        Route::put('/contract_periods/{id}', 'ContractPeriodsController@update');
+        Route::delete('/contract_periods/{id}', 'ContractPeriodsController@delete');
 
         //Patients
         Route::get('/patients', 'PatientsController@index');
         Route::get('/patients/{id}', 'PatientsController@detail');
-        Route::get('/patients/pjs/{pj_id}', 'PatientsController@getGroupPJ');
         Route::post('/patients', 'PatientsController@store');
         Route::put('/patients/{id}', 'PatientsController@update');
         Route::delete('/patients/{id}', 'PatientsController@delete');
 
-        //Contracts
-        Route::get('/contracts', 'ContractController@index');
-        Route::get('/contracts/statistic', 'ContractController@statistic');
-        Route::get('/contracts/{id}', 'ContractController@detail');
-        Route::post('/contracts', 'ContractController@store');
-        Route::put('/contracts/{id}', 'ContractController@update');
-        Route::delete('/contracts/{id}', 'ContractController@delete');
+        //Pjs
+        Route::get('/ojs', 'PjsController@index');
+        Route::get('/ojs/{id}', 'PjsController@detail');
+        Route::post('/ojs', 'PjsController@store');
+        Route::put('/ojs/{id}', 'PjsController@update');
+        Route::delete('/ojs/{id}', 'PjsController@delete');
 
-        //Contract Histories
-        Route::get('/contract_histories', 'ContractHistoryController@index');
-        Route::get('/contract_histories/{id}', 'ContractHistoryController@detail');
-        Route::post('/contract_histories', 'ContractHistoryController@store');
-        Route::put('/contract_histories/{id}', 'ContractHistoryController@update');
-        Route::delete('/contract_histories/{id}', 'ContractHistoryController@delete');
+        //Request Logs
+        Route::get('/request_logs', 'RequestLogsController@index');
+        Route::get('/request_logs/{id}', 'RequestLogsController@detail');
+        Route::post('/request_logs', 'RequestLogsController@store');
+        Route::put('/request_logs/{id}', 'RequestLogsController@update');
+        Route::delete('/request_logs/{id}', 'RequestLogsController@delete');
 
-        //Event Contracts
-        Route::get('/event_contracts', 'EventContractController@index');
-        Route::get('/event_contracts/{id}', 'EventContractController@detail');
-        Route::post('/event_contracts', 'EventContractController@store');
-        Route::put('/event_contracts/{id}', 'EventContractController@update');
-        Route::delete('/event_contracts/{id}', 'EventContractController@delete');
+        //Requests
+        Route::get('/requests', 'RequestsController@index');
+        Route::get('/requests/{id}', 'RequestsController@detail');
+        Route::post('/requests', 'RequestsController@store');
+        Route::put('/requests/{id}', 'RequestsController@update');
+        Route::delete('/requests/{id}', 'RequestsController@delete');
 
-        //Medic Tool Contracts
-        Route::get('/medic_tool_contracts', 'MedicToolContractController@index');
-        Route::get('/medic_tool_contracts/{id}', 'MedicToolContractController@detail');
-        Route::post('/medic_tool_contracts', 'MedicToolContractController@store');
-        Route::put('/medic_tool_contracts/{id}', 'MedicToolContractController@update');
-        Route::delete('/medic_tool_contracts/{id}', 'MedicToolContractController@delete');
+        //Request Service Sessions
+        Route::get('/request_service_sessions', 'RequestServiceSessionsController@index');
+        Route::get('/request_service_sessions/{id}', 'RequestServiceSessionsController@detail');
+        Route::post('/request_service_sessions', 'RequestServiceSessionsController@store');
+        Route::put('/request_service_sessions/{id}', 'RequestServiceSessionsController@update');
+        Route::delete('/request_service_sessions/{id}', 'RequestServiceSessionsController@delete');
 
-        //Medic Tools
-        Route::get('/medic_tools', 'MedicToolController@index');
-        Route::get('/medic_tools/{id}', 'MedicToolController@detail');
-        Route::post('/medic_tools', 'MedicToolController@store');
-        Route::put('/medic_tools/{id}', 'MedicToolController@update');
-        Route::delete('/medic_tools/{id}', 'MedicToolController@delete');
+        //Roles
+        Route::get('/roles', 'RolesController@index');
+        Route::get('/roles/{id}', 'RolesController@detail');
+        Route::post('/roles', 'RolesController@store');
+        Route::put('/roles/{id}', 'RolesController@update');
+        Route::delete('/roles/{id}', 'RolesController@delete');
 
-        //Medic Tool Sessions
-        Route::get('/medic_tool_sessions', 'MedicToolSessionController@index');
-        Route::get('/medic_tool_sessions/{id}', 'MedicToolSessionController@detail');
-        Route::get('/medic_tool_sessions/medic_tool/{medic_tool_id}', 'MedicToolSessionController@getMedicTools');
-        Route::post('/medic_tool_sessions', 'MedicToolSessionController@store');
-        Route::put('/medic_tool_sessions/{id}', 'MedicToolSessionController@update');
-        Route::delete('/medic_tool_sessions/{id}', 'MedicToolSessionController@delete');
+        //Services
+        Route::get('/services', 'ServicesController@index');
+        Route::get('/services/{id}', 'ServicesController@detail');
+        Route::post('/services', 'ServicesController@store');
+        Route::put('/services/{id}', 'ServicesController@update');
+        Route::delete('/services/{id}', 'ServicesController@delete');
 
-        //Nurse Categories
-        Route::get('/nurse_categories', 'NurseCategoryController@index');
-        Route::get('/nurse_categories/{id}', 'NurseCategoryController@detail');
-        Route::post('/nurse_categories', 'NurseCategoryController@store');
-        Route::put('/nurse_categories/{id}', 'NurseCategoryController@update');
-        Route::delete('/nurse_categories/{id}', 'NurseCategoryController@delete');
+        //Service Session
+        Route::get('/service_sessions', 'ServiceSessionsController@index');
+        Route::get('/service_sessions/{id}', 'ServiceSessionsController@detail');
+        Route::post('/service_sessions', 'ServiceSessionsController@store');
+        Route::put('/service_sessions/{id}', 'ServiceSessionsController@update');
+        Route::delete('/service_sessions/{id}', 'ServiceSessionsController@delete');
 
-        //Nurse Contracts
-        Route::get('/nurse_contracts', 'NurseContractController@index');
-        Route::get('/nurse_contracts/{id}', 'NurseContractController@detail');
-        Route::post('/nurse_contracts', 'NurseContractController@store');
-        Route::put('/nurse_contracts/{id}', 'NurseContractController@update');
-        Route::delete('/nurse_contracts/{id}', 'NurseContractController@delete');
+        //Sessions
+        Route::get('/sessions', 'SessionsController@index');
+        Route::get('/sessions/{id}', 'SessionsController@detail');
+        Route::post('/sessions', 'SessionsController@store');
+        Route::put('/sessions/{id}', 'SessionsController@update');
+        Route::delete('/sessions/{id}', 'SessionsController@delete');
 
-        //Nurses
-        Route::get('/nurses', 'NurseController@index');
-        Route::get('/nurses/{id}', 'NurseController@detail');
-        Route::post('/nurses', 'NurseController@store');
-        Route::put('/nurses/{id}', 'NurseController@update');
-        Route::delete('/nurses/{id}', 'NurseController@delete');
-
-        //Nurse Sessions
-        Route::get('/nurse_sessions', 'NurseSessionController@index');
-        Route::get('/nurse_sessions/{id}', 'NurseSessionController@detail');
-        Route::get('/nurse_sessions/nurse_category_id/{nurse_category_id}', 'NurseSessionController@getNurseCategory');
-        Route::post('/nurse_sessions', 'NurseSessionController@store');
-        Route::put('/nurse_sessions/{id}', 'NurseSessionController@update');
-        Route::delete('/nurse_sessions/{id}', 'NurseSessionController@delete');
-
-        //PJs
-        Route::get('/pjs', 'PjController@index');
-        Route::get('/pjs/{id}', 'PjController@detail');
-        Route::post('/pjs', 'PjController@store');
-        Route::put('/pjs/{id}', 'PjController@update');
-        Route::delete('/pjs/{id}', 'PjController@delete');
-
-        //Therapist
-        Route::get('/therapist', 'TherapistController@index');
-        Route::get('/therapist/{id}', 'TherapistController@detail');
-        Route::post('/therapist', 'TherapistController@store');
-        Route::put('/therapist/{id}', 'TherapistController@update');
-        Route::delete('/therapist/{id}', 'TherapistController@delete');
-
-        //Therapist Type
-        Route::get('/therapist_types', 'TherapistTypeController@index');
-        Route::get('/therapist_types/{id}', 'TherapistTypeController@detail');
-        Route::post('/therapist_types', 'TherapistTypeController@store');
-        Route::put('/therapist_types/{id}', 'TherapistTypeController@update');
-        Route::delete('/therapist_types/{id}', 'TherapistTypeController@delete');
-
-        //Therapist Contract
-        Route::get('/therapist_contracts', 'TherapistContractController@index');
-        Route::get('/therapist_contracts/{id}', 'TherapistContractController@detail');
-        Route::post('/therapist_contracts', 'TherapistContractController@store');
-        Route::put('/therapist_contracts/{id}', 'TherapistContractController@update');
-        Route::delete('/therapist_contracts/{id}', 'TherapistContractController@delete');
-
-        //Therapist Session
-        Route::get('/therapist_session', 'TherapistSessionController@index');
-        Route::get('/therapist_session/{id}', 'TherapistSessionController@detail');
-        Route::get('/therapist_session/therapist_type_id/{therapist_type_id}', 'TherapistSessionController@getTherapistType');
-        Route::post('/therapist_session', 'TherapistSessionController@store');
-        Route::put('/therapist_session/{id}', 'TherapistSessionController@update');
-        Route::delete('/therapist_session/{id}', 'TherapistSessionController@delete');
-
-        //Transport Contracts
-        Route::get('/transport_contracts', 'TransportContractController@index');
-        Route::get('/transport_contracts/{id}', 'TransportContractController@detail');
-        Route::post('/transport_contracts', 'TransportContractController@store');
-        Route::put('/transport_contracts/{id}', 'TransportContractController@update');
-        Route::delete('/transport_contracts/{id}', 'TransportContractController@delete');
-
-        //Transport Times
-        Route::get('/transport_times', 'TransportTimeController@index');
-        Route::get('/transport_times/{id}', 'TransportTimeController@detail');
-        Route::post('/transport_times', 'TransportTimeController@store');
-        Route::put('/transport_times/{id}', 'TransportTimeController@update');
-        Route::delete('/transport_times/{id}', 'TransportTimeController@delete');
-
-        //Transport Times
-        Route::get('/contract_statuses', 'ContractStatusController@index');
-        Route::get('/contract_statuses/{id}', 'ContractStatusController@detail');
-        Route::post('/contract_statuses', 'ContractStatusController@store');
-        Route::put('/contract_statuses/{id}', 'ContractStatusController@update');
-        Route::delete('/contract_statuses/{id}', 'ContractStatusController@delete');
-
-        //Statistic
-        Route::get('/statistic/status', 'StatisticController@status');
-        Route::get('/statistic/service', 'StatisticController@service');
-
-        //Reports
-        Route::get('/reports/nurses', 'ReportsController@nurses');
-        Route::get('/reports/medic_tools', 'ReportsController@medicTools');
-        Route::get('/reports/therapists', 'ReportsController@therapists');
-        Route::get('/reports/transports', 'ReportsController@transports');
-        Route::get('/reports/events', 'ReportsController@events');
-
-        //Contract Request
-        Route::get('/contract_requests', 'ContractRequestController@index');
-        Route::get('/contract_requests/{id}', 'ContractRequestController@detail');
-        Route::post('/contract_requests', 'ContractRequestController@store');
-        Route::put('/contract_requests/{id}', 'ContractRequestController@update');
-        Route::delete('/contract_requests/{id}', 'ContractRequestController@delete');
-
-        //Event Contract Request
-        Route::get('/event_contract_requests', 'EventContractRequestController@index');
-        Route::get('/event_contract_requests/{id}', 'EventContractRequestController@detail');
-        Route::post('/event_contract_requests', 'EventContractRequestController@store');
-        Route::put('/event_contract_requests/{id}', 'EventContractRequestController@update');
-        Route::delete('/event_contract_requests/{id}', 'EventContractRequestController@delete');
-
-        //Medic Tool Contract Request
-        Route::get('/medic_tool_contract_requests', 'MedicToolContractRequestController@index');
-        Route::get('/medic_tool_contract_requests/{id}', 'MedicToolContractRequestController@detail');
-        Route::post('/medic_tool_contract_requests', 'MedicToolContractRequestController@store');
-        Route::put('/medic_tool_contract_requests/{id}', 'MedicToolContractRequestController@update');
-        Route::delete('/medic_tool_contract_requests/{id}', 'MedicToolContractRequestController@delete');
-
-        //Nurse Contract Request
-        Route::get('/nurse_contract_requests', 'NurseContractRequestController@index');
-        Route::get('/nurse_contract_requests/{id}', 'NurseContractRequestController@detail');
-        Route::post('/nurse_contract_requests', 'NurseContractRequestController@store');
-        Route::put('/nurse_contract_requests/{id}', 'NurseContractRequestController@update');
-        Route::delete('/nurse_contract_requests/{id}', 'NurseContractRequestController@delete');
-
-        //Therapist Contract Request
-        Route::get('/therapist_contract_requests', 'TherapistContractRequestController@index');
-        Route::get('/therapist_contract_requests/{id}', 'TherapistContractRequestController@detail');
-        Route::post('/therapist_contract_requests', 'TherapistContractRequestController@store');
-        Route::put('/therapist_contract_requests/{id}', 'TherapistContractRequestController@update');
-        Route::delete('/therapist_contract_requests/{id}', 'TherapistContractRequestController@delete');
-
-        //Transport Contract Request
-        Route::get('/transport_contract_requests', 'TransportContractRequestController@index');
-        Route::get('/transport_contract_requests/{id}', 'TransportContractRequestController@detail');
-        Route::post('/transport_contract_requests', 'TransportContractRequestController@store');
-        Route::put('/transport_contract_requests/{id}', 'TransportContractRequestController@update');
-        Route::delete('/transport_contract_requests/{id}', 'TransportContractRequestController@delete');
+        //Statuses
+        Route::get('/statuses', 'StatusesController@index');
+        Route::get('/statuses/{id}', 'StatusesController@detail');
+        Route::post('/statuses', 'StatusesController@store');
+        Route::put('/statuses/{id}', 'StatusesController@update');
+        Route::delete('/statuses/{id}', 'StatusesController@delete');
     });
 });
 
