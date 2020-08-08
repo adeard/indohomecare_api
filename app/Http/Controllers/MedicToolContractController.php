@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\ServiceSessions;
+use App\medic_tool_contract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\Api;
 
-class ServiceSessionsController extends Controller
+class MedicToolContractController extends Controller
 {
     public function __construct()
     {
@@ -19,8 +19,11 @@ class ServiceSessionsController extends Controller
     public function index(Request $request) {
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
-            
-            $this->data = ServiceSessions::with(['sessions', 'services'])->paginate($paginate);
+            if ($request->contract_id) {
+                $this->data = medic_tool_contract::with(['medic_tools', 'medic_tool_sessions'])->where('contract_id', $request->contract_id)->paginate($paginate);
+            } else {
+                $this->data = medic_tool_contract::paginate($paginate);
+            }
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -31,16 +34,25 @@ class ServiceSessionsController extends Controller
 
     public function store(Request $request) {
         try {
-            // $validator = Validator::make($request->all(), [
-            //     'nurse_id' => 'required',
-            //     'nurse_session_id' => 'required',
-            //     'contract_id' => 'required',
-            // ]);
+            $validator = Validator::make($request->all(), [
+                'medic_tool_id' => 'required',
+                'medic_tool_session_id' => 'required',
+                'contract_id' => 'required',
+                'quantity' => 'required'
+            ]);
 
-            // if($validator->fails())
-            //     return response()->json($validator->errors(), 400);
+            if($validator->fails())
+                return response()->json($validator->errors(), 400);
 
-            $this->data = ServiceSessions::create($request->all());
+            $data_post = [
+                'contract_id' => $request->get('contract_id'),
+                'medic_tool_id' => $request->get('medic_tool_id'),
+                'medic_tool_session_id' => $request->get('medic_tool_session_id'),
+                'quantity' => $request->get('quantity'),
+                'total_price' => $request->get('total_price')
+            ];
+
+            $this->data = medic_tool_contract::create($data_post);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -51,7 +63,7 @@ class ServiceSessionsController extends Controller
 
     public function detail($id = null) {
         try {
-            $this->data = ServiceSessions::find($id);
+            $this->data = medic_tool_contract::find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -62,9 +74,9 @@ class ServiceSessionsController extends Controller
 
     public function update(Request $request, $id) {
         try {
-            $update = ServiceSessions::where('id', $id)->update($request->all());
+            $update = medic_tool_contract::where('id', $id)->update($request->all());
 
-            $this->data = ServiceSessions::find($id);
+            $this->data = medic_tool_contract::find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -76,7 +88,7 @@ class ServiceSessionsController extends Controller
     public function delete($id = null) {
         try{
             if(!empty($id)){
-                $Obj = ServiceSessions::find($id);
+                $Obj = medic_tool_contract::find($id);
                 $Obj->delete();
 
                 $this->data =  $id;

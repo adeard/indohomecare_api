@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\ServiceSessions;
+use App\transport_time;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\Api;
 
-class ServiceSessionsController extends Controller
+class TransportTimeController extends Controller
 {
     public function __construct()
     {
@@ -19,8 +19,8 @@ class ServiceSessionsController extends Controller
     public function index(Request $request) {
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
-            
-            $this->data = ServiceSessions::with(['sessions', 'services'])->paginate($paginate);
+
+            $this->data = transport_time::paginate($paginate);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -31,16 +31,20 @@ class ServiceSessionsController extends Controller
 
     public function store(Request $request) {
         try {
-            // $validator = Validator::make($request->all(), [
-            //     'nurse_id' => 'required',
-            //     'nurse_session_id' => 'required',
-            //     'contract_id' => 'required',
-            // ]);
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'price' => 'required'
+            ]);
 
-            // if($validator->fails())
-            //     return response()->json($validator->errors(), 400);
+            if($validator->fails())
+                return response()->json($validator->errors(), 400);
 
-            $this->data = ServiceSessions::create($request->all());
+            $data_post = [
+                'name' => $request->get('name'),
+                'price' => $request->get('price')
+            ];
+
+            $this->data = transport_time::create($data_post);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -51,7 +55,7 @@ class ServiceSessionsController extends Controller
 
     public function detail($id = null) {
         try {
-            $this->data = ServiceSessions::find($id);
+            $this->data = transport_time::find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -62,9 +66,9 @@ class ServiceSessionsController extends Controller
 
     public function update(Request $request, $id) {
         try {
-            $update = ServiceSessions::where('id', $id)->update($request->all());
+            $update = transport_time::where('id', $id)->update($request->all());
 
-            $this->data = ServiceSessions::find($id);
+            $this->data = transport_time::find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -76,7 +80,7 @@ class ServiceSessionsController extends Controller
     public function delete($id = null) {
         try{
             if(!empty($id)){
-                $Obj = ServiceSessions::find($id);
+                $Obj = transport_time::find($id);
                 $Obj->delete();
 
                 $this->data =  $id;

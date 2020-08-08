@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\ServiceSessions;
+use App\contract_history;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\Api;
 
-class ServiceSessionsController extends Controller
+class ContractHistoryController extends Controller
 {
     public function __construct()
     {
@@ -19,8 +19,12 @@ class ServiceSessionsController extends Controller
     public function index(Request $request) {
         try {
             $paginate = ($request->has('limit'))?$request->limit:10;
-            
-            $this->data = ServiceSessions::with(['sessions', 'services'])->paginate($paginate);
+
+            if ($request->contract_id) {
+                $this->data = contract_history::with(['users'])->where('contract_id', $request->contract_id)->paginate($paginate);
+            } else {
+                $this->data = contract_history::with(['users'])->paginate($paginate);
+            }
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -31,16 +35,21 @@ class ServiceSessionsController extends Controller
 
     public function store(Request $request) {
         try {
-            // $validator = Validator::make($request->all(), [
-            //     'nurse_id' => 'required',
-            //     'nurse_session_id' => 'required',
-            //     'contract_id' => 'required',
-            // ]);
+            $validator = Validator::make($request->all(), [
+                'contract_id' => 'required',
+                'description' => 'required'
+            ]);
 
-            // if($validator->fails())
-            //     return response()->json($validator->errors(), 400);
+            if($validator->fails())
+                return response()->json($validator->errors(), 400);
 
-            $this->data = ServiceSessions::create($request->all());
+            $data_post = [
+                'contract_id' => $request->get('contract_id'),
+                'description' => $request->get('description'),
+                'user_id' => $request->get('user_id')
+            ];
+
+            $this->data = contract_history::create($data_post);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -51,7 +60,7 @@ class ServiceSessionsController extends Controller
 
     public function detail($id = null) {
         try {
-            $this->data = ServiceSessions::find($id);
+            $this->data = contract_history::find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -62,9 +71,9 @@ class ServiceSessionsController extends Controller
 
     public function update(Request $request, $id) {
         try {
-            $update = ServiceSessions::where('id', $id)->update($request->all());
+            $update = contract_history::where('id', $id)->update($request->all());
 
-            $this->data = ServiceSessions::find($id);
+            $this->data = contract_history::find($id);
         } catch (\Exception $e) {
             $this->status   = "false";
             $this->errorMsg = $e->getMessage();
@@ -76,8 +85,7 @@ class ServiceSessionsController extends Controller
     public function delete($id = null) {
         try{
             if(!empty($id)){
-                $Obj = ServiceSessions::find($id);
-                $Obj->delete();
+                $Obj = contract_history::find($id);
 
                 $this->data =  $id;
             }

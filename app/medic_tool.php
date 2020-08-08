@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ServiceSessions extends Model
+class medic_tool extends Model
 {
     use SoftDeletes;
 
@@ -13,18 +13,18 @@ class ServiceSessions extends Model
     public $keyType      = 'string';
     public $primaryKey   = 'id';
 
-    protected $table = 'service_sessions';
+    protected $table = 'medic_tools';
     protected $guarded = ['id'];
     protected $dates =['deleted_at'];
     protected $fillable = [
-        'service_id', 'session_id', 'price', 'need_patient', 'is_active'
+        'name', 'medic_tool_category'
     ];
 
-    public function sessions() {
-        return $this->hasOne('App\Sessions', 'id', 'session_id');
+    public function medic_tool_contracts(){
+        return $this->hasMany('App\medic_tool_contract', 'medic_tool_id', 'id');
     }
 
-    public function services() {
-        return $this->hasOne('App\Services', 'id', 'service_id');
+    public function medic_tool_sessions(){
+        return $this->hasMany('App\medic_tool_session', 'medic_tool_id', 'id');
     }
 }
